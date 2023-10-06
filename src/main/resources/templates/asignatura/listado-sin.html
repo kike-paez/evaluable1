@@ -20,6 +20,8 @@
 	</head>
 	<body>
 		<a th:href="@{/home}">Inicio</a>
+		<br/>
+		<a th:href="@{/asignatura/listado/sin}">Listado completo</a>
 		<p th:if="${listaAsignaturas.size() == 0}">No hay asignaturas que mostrar</p>
 		<table th:if="${listaAsignaturas.size() != 0}">
 			<thead>
@@ -36,7 +38,9 @@
 					<td th:text="${asignatura.id}" />
 					<td th:text="${asignatura.nombre}" />
 					<td th:text="${asignatura.descripcion}" />
-					<td th:text="${asignatura.tipo}" />
+					<td>
+						<a th:text="${asignatura.tipo}" th:href="@{/asignatura/listado/sin?tipo=} + ${asignatura.tipo}" />
+					</td>
 					<td th:text="${asignatura.numeroCreditos}" />
 				</tr>
 			</tbody>
