@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<title th:text="${titulo}" />
+		<style>
+			table {
+				border-collapse: collapse;
+				margin: 0 auto;
+				/* Margen automático para centrar horizontalmente */
+			}
+	
+			td,
+			th {
+				border: 1px solid darkgray;
+				padding: 8px;
+				text-align: center;
+			}
+		</style>
+	</head>
+	<body>
+		<a th:href="@{/home}">Inicio</a>
+		<br/>
+		<a th:href="@{/asignatura/listado/con}">Listado completo</a>
+		<p th:if="${listaAsignaturas.size() == 0}">No hay asignaturas que mostrar</p>
+		<table th:if="${listaAsignaturas.size() != 0}">
+			<thead>
+				<tr>
+					<td>Id</td>
+					<td>Nombre</td>
+					<td>Descripción</td>
+					<td>Tipo</td>
+					<td>Número de créditos</td>
+					<td>Número de alumnos matriculados</td>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="asignatura : ${listaAsignaturas}">
+					<td th:text="${asignatura.id}" />
+					<td th:text="${asignatura.nombre}" />
+					<td th:text="${asignatura.descripcion}" />
+					<td>
+						<a th:text="${asignatura.tipo}" th:href="@{/asignatura/listado/con?tipo=} + ${asignatura.tipo}" />
+					</td>
+					<td th:text="${asignatura.numeroCreditos}" />
+					<td th:text="${asignatura.numeroAlumnosMatriculados}" />
+				</tr>
+			</tbody>
+		</table>
+	</body>
+</html>
